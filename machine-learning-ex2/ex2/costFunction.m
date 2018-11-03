@@ -24,6 +24,9 @@ h = sigmoid(X * theta)
 costMatrix = -y .* log(h) - (1 - y) .* log(1 - h)
 J = (1 / m) * sum(costMatrix)
 
+dif = h - y
+grad = (1 / m) * transpose(sum(dif .* X))
+
 % =============================================================
 
 end
