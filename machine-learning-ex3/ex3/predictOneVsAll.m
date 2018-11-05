@@ -30,8 +30,9 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-predicts = X * transpose(all_theta);
-p = max(predicts, [], 2);
+predicts = sigmoid(X * transpose(all_theta));
+[_, ind] = max(predicts, [], 2);
+p = ind;
 
 % =========================================================================
 
