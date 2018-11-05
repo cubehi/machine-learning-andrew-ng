@@ -37,16 +37,18 @@ grad = zeros(size(theta));
 %
 
 h = sigmoid(X * theta);
+
+temp_theta = theta;
+temp_theta(1) = 0;
+
 costMatrix = -y .* log(h) - (1 - y) .* log(1 - h);
 J = (1 / m) * sum(costMatrix);
-regCost = (lambda / (2 * m)) * sum(theta .* 2);
+regCost = (lambda / (2 * m)) * sum(temp_theta .^ 2);
 J = J + regCost
 
 dif = h - y;
 grad = (1 / m) * transpose(sum(dif .* X));
-temp = theta;
-temp(1) = 0;
-regGrad = (lambda / m) * temp;
+regGrad = (lambda / m) * temp_theta;
 grad = grad + regGrad;
 
 % =============================================================

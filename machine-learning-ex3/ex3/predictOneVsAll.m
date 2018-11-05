@@ -30,11 +30,8 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
-
-
+predicts = X * transpose(all_theta);
+p = max(predicts, [], 2);
 
 % =========================================================================
 
