@@ -62,23 +62,19 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+recodedY = zeros(m, num_labels);
+for i = 1:m
+  recodedY(i, :) = [1:num_labels];
+endfor
+y = recodedY == y;
 
+a1 = [ones(m, 1) X];
+a2 = sigmoid(a1 * transpose(Theta1));
+a2 = [ones(m, 1) a2];
+h = sigmoid(a2 * transpose(Theta2));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+temp = y .* log(h) + (1 - y) .* log(1 - h);
+J = (-1 / m) * sum(sum(temp));
 
 % -------------------------------------------------------------
 
