@@ -69,7 +69,8 @@ endfor
 y = recodedY == y;
 
 a1 = [ones(m, 1) X];
-a2 = sigmoid(a1 * transpose(Theta1));
+z2 = a1 * transpose(Theta1);
+a2 = sigmoid(z2);
 a2 = [ones(m, 1) a2];
 h = sigmoid(a2 * transpose(Theta2));
 
@@ -80,7 +81,12 @@ regJ2 = sum(sum(Theta2(:, 2:end) .^ 2));
 regJ = lambda / (2 * m) * (regJ1 + regJ2);
 J += regJ;
 % -------------------------------------------------------------
-
+delta3 = h - y;
+delta2 = delta3 * Theta2;
+delta2 = delta2(:, 2:end);
+delta2 = delta2 .* sigmoidGradient(z2);
+Theta2_grad = (1 / m) * transpose(delta3) * a2;
+Theta1_grad = (1 / m) * transpose(delta2) * a1;
 % =========================================================================
 
 % Unroll gradients
