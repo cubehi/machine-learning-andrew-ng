@@ -87,6 +87,10 @@ delta2 = delta2(:, 2:end);
 delta2 = delta2 .* sigmoidGradient(z2);
 Theta2_grad = (1 / m) * transpose(delta3) * a2;
 Theta1_grad = (1 / m) * transpose(delta2) * a1;
+Theta2_grad = [Theta2_grad(:, 1) Theta2_grad(:, 2:end) + (lambda / m) * Theta2(:, 2:end)];
+Theta1_grad = [Theta1_grad(:, 1) Theta1_grad(:, 2:end) + (lambda / m) * Theta1(:, 2:end)];
+% fprintf('\nTheta1_grad ...\n');
+% size(Theta2_grad)
 % =========================================================================
 
 % Unroll gradients
