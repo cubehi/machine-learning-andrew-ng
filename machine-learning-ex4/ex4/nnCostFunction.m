@@ -75,7 +75,10 @@ h = sigmoid(a2 * transpose(Theta2));
 
 temp = y .* log(h) + (1 - y) .* log(1 - h);
 J = (-1 / m) * sum(sum(temp));
-
+regJ1 = sum(sum(Theta1(:, 2:end) .^ 2));
+regJ2 = sum(sum(Theta2(:, 2:end) .^ 2));
+regJ = lambda / (2 * m) * (regJ1 + regJ2);
+J += regJ;
 % -------------------------------------------------------------
 
 % =========================================================================
